@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-js-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: html-js
+  template:
+    metadata:
+      labels:
+        app: html-js
+    spec:
+          configMap:
+            name: configmap
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html-js-volume
+              mountPath: /usr/share/nginx/html
+            - name: script-js-volume
+              mountPath: /usr/share/nginx/html/js
