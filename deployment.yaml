@@ -1,26 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: html-js-deployment
+  name: weather-app-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: html-js
+      app: weather-app
   template:
     metadata:
       labels:
-        app: html-js
+        app: weather-app
     spec:
-          configMap:
-            name: configmap
       containers:
-        - name: nginx
-          image: nginx:alpine
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - name: html-js-volume
-              mountPath: /usr/share/nginx/html
-            - name: script-js-volume
-              mountPath: /usr/share/nginx/html/js
+      - name: weather-app
+        image: my-html-js-server
+        ports:
+        - containerPort: 80
